@@ -2,85 +2,98 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">用户注册</div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">用户名</label>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text"
+                                    class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name"
+                                    value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail 地址</label>
+                        <div class="form-group row">
+                            <label for="email"
+                                class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email"
+                                    class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"
+                                    value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">密 码</label>
+                        <div class="form-group row">
+                            <label for="password"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password"
+                                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                    name="password" required>
 
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">重复密码</label>
+                        <div class="form-group row">
+                            <label for="password-confirm"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control"
+                                    name="password_confirmation" required>
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('captcha') ? ' has-error' : '' }}">
-                            <label for="captcha" class="col-md-4 control-label">验证码</label>
+                        <div class="form-group row">
+                            <label for="captcha" class="col-md-4 col-form-label text-md-right">验证码</label>
 
                             <div class="col-md-6">
-                                <input id="captcha" class="form-control" name="captcha" >
+                                <input id="captcha"
+                                    class="form-control{{ $errors->has('captcha') ? ' is-invalid' : '' }}"
+                                    name="captcha" required>
 
-                                <img class="thumbnail captcha" src="{{ captcha_src('flat') }}" onclick="this.src='/captcha/flat?'+Math.random()" title="点击图片重新获取验证码">
+                                <img class="thumbnail captcha mt-3 mb-2" src="{{ captcha_src('flat') }}"
+                                    onclick="this.src='/captcha/flat?'+Math.random()" title="点击图片重新获取验证码">
 
                                 @if ($errors->has('captcha'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('captcha') }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('captcha') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    注册 <i class="glyphicon glyphicon-arrow-right"></i>
+                                    {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
