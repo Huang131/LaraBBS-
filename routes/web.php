@@ -68,3 +68,5 @@ Route::get('permission-denied', 'PagesController@permissionDenied')->name('permi
 
 
 
+
+Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
