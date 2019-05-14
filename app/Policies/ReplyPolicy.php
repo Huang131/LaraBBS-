@@ -7,13 +7,13 @@ use App\Models\Reply;
 
 class ReplyPolicy extends Policy
 {
-    public function update(User $user, Reply $reply)
+    public function deteled(User $user, Reply $reply)
     {
-        // return $reply->user_id == $user->id;
-        return true;
+        return $user->isAuthorOf($reply) || $user->isAuthorOf($reply->topic);
+
     }
 
-    public function destroy(User $user, Reply $reply)
+    public function update(User $user, Reply $reply)
     {
         return true;
     }
