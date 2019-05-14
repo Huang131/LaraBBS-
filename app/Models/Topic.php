@@ -53,7 +53,7 @@ class Topic extends Model
 
     public function replies()
     {
-        return $this->hashMany(Reply::class);
+        return $this->hasMany(Reply::class);
     }
 
 }
