@@ -21,7 +21,7 @@ return array(
      *
      * @type string
      */
-    'title' => config('APP_NAME','Laravel'),
+    'title' => config('APP_NAME', 'Laravel'),
 
     /*
      * 模型配置信息文件存放目录
@@ -59,10 +59,15 @@ return array(
      *	)
      */
     'menu' => [
-        '用户与权限'=>[
+        '用户与权限' => [
             'users',
             'roles',
             'permissions',
+        ],
+        '内容管理' => [
+            'categories',
+            'topics',
+            'replies',
         ],
     ],
 
