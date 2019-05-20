@@ -36,13 +36,13 @@ class VerificationCodesController extends Controller
 
 
         $key = 'verificationCode_' . str_random(15);
-        $expireAt = now()->addMinute(10);
+        $expireAt = now()->addMinutes(10);
         //缓存验证码10分钟过期
-        \Cache::put('$key', ['phone' => $phone, 'code' => $code], $expireAt);
+        \Cache::put($key, ['phone' => $phone, 'code' => $code], $expireAt);
 
         return $this->response->array([
             'key' => $key,
-            'expired_at' => $expireAt->toDateString(),
+            'expired_at' => $expireAt->toDateTimeString(),
         ])->setStatusCode(201);
     }
 }
