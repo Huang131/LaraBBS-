@@ -158,7 +158,7 @@ return [
         Illuminate\Redis\RedisServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
-        Overtrue \ LaravelLang \ TranslationServiceProvider :: class,
+        Overtrue\LaravelLang\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
@@ -177,6 +177,8 @@ return [
 
 
         Mews\Captcha\CaptchaServiceProvider::class,
+
+        App\Providers\EasySmsServiceProvider::class,
 
     ],
 
@@ -226,7 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Captcha'=>Mews\Captcha\Facades\Captcha::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];
