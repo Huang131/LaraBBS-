@@ -2,24 +2,20 @@
 
 namespace App\Models;
 
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Auth;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmailContract
+class User extends Authenticatable implements JWTSubject
 {
+    use Traits\ActiveUserHelper;
+    use Traits\LastActivedAtHelper;
     use HasRoles;
-    use MustVerifyEmailTrait;
     use Notifiable {
     notify as protected laravelNotify;
     }
-
-    use Traits\ActiveUserHelper;
-    use Traits\LastActivedAtHelper;
-
 
 
     /**
@@ -32,6 +28,17 @@ class User extends Authenticatable implements MustVerifyEmailContract
         'weixin_openid', 'weixin_unionid',
     ];
 
+
+    //Rest omitted for brevity
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 
     public function notify($instance)
     {
