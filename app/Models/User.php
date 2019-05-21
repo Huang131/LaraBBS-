@@ -21,6 +21,18 @@ class User extends Authenticatable implements MustVerifyEmailContract
     use Traits\LastActivedAtHelper;
 
 
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password', 'introduction', 'avatar', 'phone',
+        'weixin_openid', 'weixin_unionid',
+    ];
+
+
     public function notify($instance)
     {
         //如果要通知的人是当前用户,就不必通知了
@@ -36,14 +48,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
         $this->laravelNotify($instance);
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password', 'introduction', 'avatar', 'phone'
-    ];
+
 
     /**
      * The attributes that should be hidden for arrays.
