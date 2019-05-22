@@ -66,6 +66,7 @@ $api->version('v1', [
         'limit' => config('api.rate_limits.access.limit'),
         'expires' => config('api.rate_limits.access.expires'),
     ], function ($api) {
+
         //游客可以访问的接口
         $api->get('categories', 'CategoriesController@index')
             ->name('api.categories.index');
@@ -80,7 +81,17 @@ $api->version('v1', [
         $api->get('users/{user}/topics', 'TopicsController@userIndex')
             ->name('api.users.topics.index');
         // 话题回复列表
-
+        $api->get('topics/{topic}/replies', 'RepliesController@index')
+            ->name('api.topics.replies.index');
+        // 某个用户的回复列表
+        $api->get('users/{user}/replies', 'RepliesController@userIndex')
+            ->name('api.users.replies.index');
+        // // 资源推荐
+        // $api->get('links', 'LinksController@index')
+        //     ->name('api.links.index');
+        // // 活跃用户
+        // $api->get('actived/users', 'UsersController@activedIndex')
+        //     ->name('api.actived.users.index');
 
         //需要token验证的接口
         $api->group(['middleware' => 'api.auth'], function ($api) {
@@ -106,6 +117,12 @@ $api->version('v1', [
                 ->name('api.topics.destory');
             $api->get('user/topics', 'TopicsController@myIndex')
                 ->name('api.user.topics.index');
+            // 发布回复
+            $api->post('topics/{topic}/replies', 'RepliesController@store')
+                ->name('api.topics.replies.store');
+            // 删除回复
+            $api->delete('topics/{topic}/replies/{reply}', 'RepliesController@destroy')
+                ->name('api.topics.replies.destroy');
         });
     });
 });
