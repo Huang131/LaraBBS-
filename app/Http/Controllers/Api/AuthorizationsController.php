@@ -108,9 +108,11 @@ class AuthorizationsController extends Controller
     public function weappStore(WeappAuthorizationRequest $request)
     {
         $code = $request->code;
+    
         // 根据 code 获取微信 openid 和 session_key
         $miniProgram = \EasyWeChat::miniProgram();
         $data = $miniProgram->auth->session($code);
+
         // 如果结果错误，说明 code 已过期或不正确，返回 401 错误
         if (isset($data['errcode'])) {
             return $this->response->errorUnauthorized('code 不正确');
