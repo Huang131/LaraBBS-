@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Transformers\UserTransformer;
 use App\Http\Requests\Api\UserRequest;
@@ -56,12 +57,12 @@ class UsersController extends Controller
 
         //判断验证码是否相等,不相等返回401错误
         if(!hash_equals((string)$verifyData['code'],$request->verification_code)){
-            return $this->response-<errorUnauthorized('验证码错误');
+            return $this->response->errorUnauthorized('验证码错误');
         }
 
         //获取微信的openid和session_key
-        $minProgram=\EasyWeChat::minProgram();
-        $data = $minProgram->auth->session($request->code);
+        $miniProgram = \EasyWeChat::miniProgram();
+        $data = $miniProgram->auth->session($request->code);
 
         if(isset($data['errcode'])){
             return $this->response->errorUnauthorized('code不正确');
@@ -120,5 +121,10 @@ class UsersController extends Controller
     public function activedIndex(User $user)
     {
         return $this->response->collection($user->getActiveUsers(), new UserTransformer());
+    }
+
+    public function show(User $user)
+    {
+        retutrn $this->response->item($user,new UserTransformer());
     }
 }
