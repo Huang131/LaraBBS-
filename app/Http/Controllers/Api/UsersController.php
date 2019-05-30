@@ -125,6 +125,6 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        retutrn $this->response->item($user,new UserTransformer());
+        return $this->response->item($user,new UserTransformer());
     }
 }
